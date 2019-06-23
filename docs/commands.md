@@ -2,7 +2,7 @@ Commands
 ====
 Here we can write some command ideas!
 
-- !league build <champion>
+- !league build <\champion>\
 
 Show all (runes, build, win rate and items) that a champion have on champion.gg.
 
