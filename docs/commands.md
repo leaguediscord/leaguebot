@@ -2,27 +2,27 @@ Commands
 ====
 Here we can write some command ideas!
 
-- !league build <\champion>\
+- !league build < champion >
 
 Show all (runes, build, win rate and items) that a champion have on champion.gg.
 
-- !league build <champion> <role>
+- !league build < champion > < role >
 
 Show all (runes, build, win rate and items) that a champion have on champion.gg on a specific role.
 
-- !league build <champion> skills
+- !league build < champion > skills
 
 Show just the skill order of a champion.
 
-- !league build <champion> items
+- !league build < champion > items
 
 Show just the build order of a champion.
 
-- !league build <champion> runes
+- !league build < champion > runes
 
 Show just the runes of a champion.
 
-- !league <champion> vs <champion>
+- !league < champion > vs < champion >
 
 Show the itens for this given matchup if its possible.
 
@@ -38,7 +38,7 @@ Show just the champions on the last patch notes.
 
 Show just the items on the last patch notes.
 
-- !league patch <champion> (pt?)
+- !league patch < champion > (pt?)
 
 Show just a given champion changes on the last patch notes.
 
