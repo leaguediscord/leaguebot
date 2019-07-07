@@ -1,9 +1,9 @@
 const cheerio = require('cheerio')
 const axios = require('axios')
 
-exports.getAll = async () => {
+exports.getAll = async givenChampion => {
     try{
-        const res = await axios.get('https://champion.gg/champion/jhin/')
+        const res = await axios.get(`https://champion.gg/champion/${givenChampion}/`)
         const $ = cheerio.load(res.data)
 
         // Pegando itens
@@ -87,5 +87,6 @@ exports.getAll = async () => {
 
     }catch(err){
         console.log(err)
+        return {error: true}
     }
 }
