@@ -1,12 +1,12 @@
 const cheerio = require('cheerio')
 const axios = require('axios')
 
-const response = (async () => {
+exports.getAll = async () => {
     try{
         const res = await axios.get('https://champion.gg/champion/jhin/')
         const $ = cheerio.load(res.data)
 
-        //Pegando itens
+        // Pegando itens
         const items = []
         const itemBox = $('.build-wrapper').find('a')
         items.push(itemBox.attr('href').substring(38))
@@ -16,14 +16,14 @@ const response = (async () => {
         items.push(itemBox.next().next().next().next().next().next().next().next().attr('href').substring(38))
         items.push(itemBox.next().next().next().next().next().next().next().next().next().next().attr('href').substring(38))
        
-        //Pegando runas
+        // Pegando runas
         const runes = {
             primary: [], 
             secondary: [], 
             additional:[]
         }
 
-        //primarias
+        // Primarias
         const runeBox = $('#primary-path').find('.Slot__Block-epLguL')
         runes.primary.push(runeBox.find('.Description__Title-jfHpQH').html())
         runes.primary.push(runeBox.next().find('.Description__Title-jfHpQH').html())
@@ -31,45 +31,61 @@ const response = (async () => {
         runes.primary.push(runeBox.next().next().next().find('.Description__Title-jfHpQH').html())
         runes.primary.push(runeBox.next().next().next().next().find('.Description__Title-jfHpQH').html())
 
-        //secundarias
+        // Secundarias
         const runeBox2 = $('#secondary-path').find('.Slot__Block-epLguL')
         runes.secondary.push(runeBox2.find('.Description__Title-jfHpQH').html())
         runes.secondary.push(runeBox2.next().find('.Description__Title-jfHpQH').html())
-        //falta o ultimo
         
-        //adicional
+        // Falta o ultimo
+        
+        // Adicional
         runes.additional.push(runeBox2.next().next().find('.Description__Title-jfHpQH').html())
         runes.additional.push(runeBox2.next().prev().last().find('.Description__Title-jfHpQH').html())
         runes.additional.push(runeBox2.next().next().last().find('.Description__Title-jfHpQH').html())
 
-        //pegando skills
-        skills = {
-            Q: [],
-            W: [],
-            E: [],
-            R: []
-        }
+        // Pegando skills
+        const skills = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+
+        let count = 0
 
         const skillBox = $('.skill-order').find('.skill').next()
-        skills.Q.push(skillBox.toArray())
+        const skillItem = skillBox.find('.skill-selections').each((item,value) => {
+            value.children.forEach(innerItem => { 
+                if(innerItem.attribs != undefined){
+                    if(innerItem.attribs.class === 'selected'){
+                        skills[count].push('X')
+                    }else{
+                        skills[count].push(' ')
+                    }
+                }
+            })
+            count++
+        })
 
-        //devolvendo o campeao
+        skills.pop()
+        skills.pop()
+        skills.pop()
+        skills.pop()
+        
+        // Preparando resposta
         const champion = {
             items,
             runes,
             skills
         }
 
-        let t  =skillBox.find('.skill-selections').toArray()
-        t.forEach(item => {
-
-            
-            console.log(item.tagName)
-        })
-
-        //Pegando skills
+        return champion
 
     }catch(err){
         console.log(err)
     }
-})()
+}
