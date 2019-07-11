@@ -15,38 +15,45 @@ client.startTime = Date.now()
 
 // Lista todos os diretorios que contém arquivos commands.js
 const commandsDir = readdirSync('./app/')
-console.log('log', `Carregando o total de ${commandsDir.length} comandos.`)
+console.log('[log]', `Carregando o total de ${commandsDir.length} comandos`)
 
 // Percorrendo a lista de diretorios 
 commandsDir.forEach(commandDir => {
   try {
+
+    // Importando comando
     const command = require(`./app/${commandDir}/commands`)
-    console.log('log', `Carregando comando: ${command.help.name}`)
+    console.log('[log]', `Carregando comando: ${command.help.name}`)
 
-    if (command.init) command.init(client)
-
+    // Salvando na collection
     client.commands.set(command.help.name, command)
-    if (command.help.aliases) {
-      command.alias = true
-      command.help.aliases.forEach(alias => client.commands.set(alias, command))
-    }
+
   } catch (err) {
-    console.log(`${commandDir}: ${err}`)
+    console.log('[error]', `${commandDir}: ${err}`)
   }
 })
 
-/** Então carregamos o evento quase do mesmo modo que o processo dos comandos. */
-const evtFiles = readdirSync('./events/')
-console.log('log', `Carregando o total de ${evtFiles.length} eventos`)
-evtFiles.forEach(f => {
-  const eventName = f.split('.')[0]
-  const event = require(`./events/${f}`)
+// Lista o diretorio de evento
+const eventFiles = readdirSync('./events/')
+console.log('[log]', `Carregando o total de ${eventFiles.length} eventos`)
 
+// Percorrendo arquivos de eventos
+eventFiles.forEach(eventFile => {
+
+  // Pegando o nome do arquivo
+  const eventName = eventFile.split('.')[0]
+
+  // Importando o evento
+  const event = require(`./events/${eventFile}`)
+
+  // Criando o evento para o cliente discord
   client.on(eventName, event.bind(null, client))
 })
 
+
+// Função para caso aconteça um erro
 client.on('error', (err) => {
-  console.log('error', err)
+  console.log('[error]', err)
 })
 
 // Logando na conta do client
