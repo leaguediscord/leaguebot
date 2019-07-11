@@ -8,6 +8,7 @@ module.exports = {
             givenChampion = givenChampion.toLowerCase()
             if (/(['" ])/g.test(givenChampion)) return({error: true, message: 'The champion name can not contain a \',\" or spaces'})
 
+            // Fazendo a requisicao para o champion.gg
             const res = await axios.get(`https://champion.gg/champion/${givenChampion}/`)
             const $ = cheerio.load(res.data)
 
@@ -87,8 +88,7 @@ module.exports = {
             return champion
 
         }catch(err){
-            console.log(err)
-            return {error: true}
+            return {error: true, message: 'Error on search this champion'}
         }
     },
 
@@ -119,8 +119,8 @@ module.exports = {
             return champion
 
         }catch(err){
-            console.log(err)
-            return {error: true}
+            return {error: true, message: 'Error on search this champion'}
+
         }
     },
 
@@ -168,8 +168,7 @@ module.exports = {
             return champion
 
         }catch(err){
-            console.log(err)
-            return {error: true}
+            return {error: true, message: 'Error on search this champion'}
         }
     },
 
@@ -219,8 +218,7 @@ module.exports = {
             return champion
 
         }catch(err){
-            console.log(err)
-            return {error: true}
+            return {error: true, message: 'Error on search this champion'}
         }
     }
 }
