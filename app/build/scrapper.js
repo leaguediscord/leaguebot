@@ -41,6 +41,7 @@ module.exports = {
             const runeBox2 = $('#secondary-path').find('.Slot__Block-epLguL')
             runes.secondary.push(runeBox2.find('.Description__Title-jfHpQH').html())
             runes.secondary.push(runeBox2.next().find('.Description__Title-jfHpQH').html())
+            runes.secondary.push(runeBox2.next().find('.Slot__Block-epLguL').next().find('.Description__Title-jfHpQH').html())
             
             // Falta o ultimo
             
@@ -67,7 +68,7 @@ module.exports = {
             const skillItem = skillBox.find('.skill-selections').each((item,value) => {
                 value.children.forEach(innerItem => { 
                     if(innerItem.attribs != undefined){
-                        innerItem.attribs.class === 'selected' ? skills[count].push('X') : skills[count].push(' ')
+                        innerItem.attribs.class === 'selected' ? skills[count].push('X') : skills[count].push('-')
                     }
                 })
                 count++
@@ -152,6 +153,7 @@ module.exports = {
             const runeBox2 = $('#secondary-path').find('.Slot__Block-epLguL')
             runes.secondary.push(runeBox2.find('.Description__Title-jfHpQH').html())
             runes.secondary.push(runeBox2.next().find('.Description__Title-jfHpQH').html())
+            runes.secondary.push(runeBox2.next().find('.Slot__Block-epLguL').next().find('.Description__Title-jfHpQH').html())
             
             // Falta o ultimo
             
@@ -199,7 +201,7 @@ module.exports = {
             const skillItem = skillBox.find('.skill-selections').each((item,value) => {
                 value.children.forEach(innerItem => { 
                     if(innerItem.attribs != undefined){
-                        innerItem.attribs.class === 'selected' ? skills[count].push('X') : skills[count].push(' ')
+                        innerItem.attribs.class === 'selected' ? skills[count].push('X') : skills[count].push('-')
                     }
                 })
                 count++
