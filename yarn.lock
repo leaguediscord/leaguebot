@@ -1010,6 +1010,11 @@ domutils@^1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dotenv@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+  integrity sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -1024,6 +1029,13 @@ end-of-stream@^1.1.0:
   integrity sha512-1MkrZNvWTKCaigbn+W15elq2BB/L22nqrSY5DKlo3X6+vclJm8Bb5djXJBmEX6fS3+zCh/F4VBK5Z2KxJt4s2Q==
   dependencies:
     once "^1.4.0"
+
+enmap@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/enmap/-/enmap-5.0.0.tgz#7dc3a24ec7d028784d29c7c7ccec8a90b6d9ee6c"
+  integrity sha512-ntA4u4/p4FYpfFHAHiuLviIgVJYa5Bb1m5J9xkA1Ch3dgarHIqxdsDbzQS9PM3z9iF2yae/ud8uKQDMYPmRx2w==
+  dependencies:
+    lodash "^4.17.11"
 
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.2"
