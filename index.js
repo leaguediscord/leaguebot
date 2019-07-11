@@ -1,40 +1,37 @@
+// Importando modulos
 require('dotenv').config()
 const Discord = require('discord.js')
 const { readdirSync } = require('fs')
 const Enmap = require('enmap')
 
+// Criando variavel cliente do discord
 const client = new Discord.Client()
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-})
-
-/** Instancia de uma nova collection de comandos. */
+// Prepara para criar uma collection de comandos, isso será acessado no middleware de mensagens
 client.commands = new Enmap()
 
 // Guarda o timestamp do inicio para medir o uptime
 client.startTime = Date.now()
 
-/** Carregamos os commandos como uma collection. */
-const cmdFiles = readdirSync('./app/')
+// Lista todos os diretorios que contém arquivos commands.js
+const commandsDir = readdirSync('./app/')
+console.log('log', `Carregando o total de ${commandsDir.length} comandos.`)
 
-console.log('log', `Carregando o total de ${cmdFiles.length} comandos.`)
-/** Para cada comando então é registrado na memoria,
- *  e monstrado ao console que o comando foi carregado com sucesso. */
-cmdFiles.forEach(f => {
+// Percorrendo a lista de diretorios 
+commandsDir.forEach(commandDir => {
   try {
-    const props = require(`./app/${f}/commands`)
-    console.log('log', `Carregando comando: ${props.help.name}`)
+    const command = require(`./app/${commandDir}/commands`)
+    console.log('log', `Carregando comando: ${command.help.name}`)
 
-    if (props.init) props.init(client)
+    if (command.init) command.init(client)
 
-    client.commands.set(props.help.name, props)
-    if (props.help.aliases) {
-      props.alias = true
-      props.help.aliases.forEach(alias => client.commands.set(alias, props))
+    client.commands.set(command.help.name, command)
+    if (command.help.aliases) {
+      command.alias = true
+      command.help.aliases.forEach(alias => client.commands.set(alias, command))
     }
-  } catch (e) {
-    console.log(`Impossivel executar comando ${f}: ${e}`)
+  } catch (err) {
+    console.log(`${commandDir}: ${err}`)
   }
 })
 
