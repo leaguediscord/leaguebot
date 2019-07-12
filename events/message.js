@@ -21,7 +21,7 @@ module.exports = async (client, message) => {
   if (!command) return
 
   // Exibindo log do comando executado
-  console.log('[log]', `${message.author.username} (${message.author.id}) executou o comando: ${command.help.name} com os args: ${args}`)
+  console.log('[log]', `${message.author.username} (${message.author.id}) executou o comando: ${command.help.name}, com os args: ${args}`)
 
   // Executando comando
   command.run(client, message, args)

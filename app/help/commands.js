@@ -5,7 +5,7 @@ module.exports = {
         let embed = {
         color: 0x993399,
         title: 'Lista de Comandos LeagueBot',
-        url: 'https://github.com/Liga-dos-Programadores/Project-A',
+        url: 'https://github.com/leaguediscord/leaguebot',
         description: 'Todos os comandos disponíveis',
         fields: []
       }
