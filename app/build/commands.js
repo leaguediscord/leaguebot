@@ -10,6 +10,7 @@ module.exports = {
     * Que passará os argumentos atraves do middleware que programamos.
     */
   run: async (client, message, args) => {
+    try{
     const response = await scrapper.getAll(args[0])
 
     // Criando embed que sera enviado para o usuário
@@ -20,7 +21,7 @@ module.exports = {
     }
 
     // Aqui será enviado o embed no canal que o usuário exdecuto o comando
-    message.channel.send({ embed: embedItems })
+    message.author.send({ embed: embedItems })
 
     // Criando embed que sera enviado para o usuário
     let embedRunes = {
@@ -29,7 +30,7 @@ module.exports = {
       color: 0x008000
     }
 
-    message.channel.send({ embed: embedRunes })
+    message.author.send({ embed: embedRunes })
 
     // Criando embed que sera enviado para o usuário
     let embedSkill = {
@@ -49,14 +50,22 @@ R   -${response.skills[3][0]}--${response.skills[3][1]}--${response.skills[3][2]
       color: 0x000000
     }
 
-    message.channel.send(embedSkill.description)
+    message.author.send(embedSkill.description)
+        .then(() => message.react('👌'))
+        .catch(() => message.reply('Desculpe, mas eu não tenho permissões para enviar mensagens por DM para você!'))
+    }catch(err){
+    message.channel.send('Champion not found')
+        .then(() => message.react('👌'))
+        .catch(() => message.reply('Desculpe, mas eu não tenho permissões para enviar mensagens por DM para você!'))
+    }
+    
   },
   /**
     * Aqui podemos colocar mais algumas configurações do comando.
     */
   conf: {},
 
-  /**
+  /** 
     * Aqui exportamos ajuda do comando como o seu nome categoria, descrição, etc...f
     */
   get help () {
