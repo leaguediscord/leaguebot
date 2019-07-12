@@ -1,6 +1,5 @@
 const build = require('../../app/build/scrapper')
 
-
 // Testes getAll
 it('[BUILD/SRP] getAll - Pega todos os dados - Sucesso', async () => {
     const response = await build.getAll('kaisa')
